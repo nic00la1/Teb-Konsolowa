@@ -47,12 +47,15 @@ class Program
         return array;
     }
 
-    /// <summary>
-    /// Przeszukuje tablicę z użyciem wartownika.
-    /// </summary>
-    /// <param name="array">Tablica do przeszukania.</param>
-    /// <param name="value">Wartość do wyszukania.</param>
-    /// <returns>Indeks znalezionego elementu lub długość tablicy, jeśli element nie został znaleziony.</returns>
+    /***************************
+    nazwa funkcji: SearchWithSentinel
+    argumenty:
+    array - tablica do przeszukania
+    value - wartość do wyszukania
+    typ zwracany: int, indeks znalezionego elementu lub długość tablicy, jeśli element nie został znaleziony
+    informacje: Przeszukiwanie tablicy z użyciem wartownika
+    autor: Nicola Kaleta, klasa 4D
+    ***************************/
     static int SearchWithSentinel(int[] array, int value)
     {
         int n = array.Length;
