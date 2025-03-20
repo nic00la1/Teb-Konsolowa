@@ -2,6 +2,10 @@
 
 class Program
 {
+    /// <summary>
+    /// Główna metoda programu. Generuje tablicę, pobiera wartość do wyszukania od użytkownika,
+    /// przeszukuje tablicę i wyświetla wyniki.
+    /// </summary>
     static void Main(string[] args)
     {
         int[] array = GenerateRandomArray(50, 1, 100);
@@ -25,6 +29,13 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Generuje tablicę liczb pseudolosowych.
+    /// </summary>
+    /// <param name="size">Rozmiar tablicy.</param>
+    /// <param name="minValue">Minimalna wartość losowa.</param>
+    /// <param name="maxValue">Maksymalna wartość losowa.</param>
+    /// <returns>Tablica liczb pseudolosowych.</returns>
     static int[] GenerateRandomArray(int size, int minValue, int maxValue)
     {
         Random random = new Random();
@@ -36,6 +47,12 @@ class Program
         return array;
     }
 
+    /// <summary>
+    /// Przeszukuje tablicę z użyciem wartownika.
+    /// </summary>
+    /// <param name="array">Tablica do przeszukania.</param>
+    /// <param name="value">Wartość do wyszukania.</param>
+    /// <returns>Indeks znalezionego elementu lub długość tablicy, jeśli element nie został znaleziony.</returns>
     static int SearchWithSentinel(int[] array, int value)
     {
         int n = array.Length;
