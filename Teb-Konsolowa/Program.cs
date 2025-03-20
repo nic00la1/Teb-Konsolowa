@@ -4,59 +4,51 @@ class Program
 {
     static void Main(string[] args)
     {
-        int[] array = new int[50];
-        FillArrayWithRandomValues(array);
-
-        Console.WriteLine("Podaj wartość do wyszukania:");
-        int valueToFind = int.Parse(Console.ReadLine());
-
-        int index = SearchWithSentinel(array, valueToFind);
-
-        Console.WriteLine("Zawartość tablicy: " + string.Join(", ", array));
-        if (index != -1)
+        int[] array = GenerateRandomArray(50, 1, 100);
+        Console.WriteLine("Wprowadź wartość do wyszukania:");
+        if (int.TryParse(Console.ReadLine(), out int valueToFind))
         {
-            Console.WriteLine($"Wartość {valueToFind} znaleziona na indeksie {index}.");
+            int index = SearchWithSentinel(array, valueToFind);
+            Console.WriteLine("Tablica: " + string.Join(", ", array));
+            if (index == array.Length)
+            {
+                Console.WriteLine("Nie znaleziono wartości " + valueToFind + " w tablicy.");
+            }
+            else
+            {
+                Console.WriteLine("Wartość " + valueToFind + " znaleziona na indeksie: " + index);
+            }
         }
         else
         {
-            Console.WriteLine($"Wartość {valueToFind} nie została znaleziona w tablicy.");
+            Console.WriteLine("Nieprawidłowa wartość wejściowa.");
         }
     }
 
-    /// <summary>
-    /// Wypełnia tablicę liczbami pseudolosowymi z zakresu od 1 do 100.
-    /// </summary>
-    /// <param name="array">Tablica do wypełnienia.</param>
-    static void FillArrayWithRandomValues(int[] array)
+    static int[] GenerateRandomArray(int size, int minValue, int maxValue)
     {
         Random random = new Random();
-        for (int i = 0; i < array.Length; i++)
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++)
         {
-            array[i] = random.Next(1, 101);
+            array[i] = random.Next(minValue, maxValue + 1);
         }
+        return array;
     }
 
-    /// <summary>
-    /// Przeszukuje tablicę z wartownikiem w celu znalezienia pierwszego wystąpienia wartości.
-    /// </summary>
-    /// <param name="array">Tablica do przeszukania.</param>
-    /// <param name="valueToFind">Wartość do znalezienia.</param>
-    /// <returns>Indeks pierwszego wystąpienia wartości lub -1, jeśli wartość nie została znaleziona.</returns>
-    static int SearchWithSentinel(int[] array, int valueToFind)
+    static int SearchWithSentinel(int[] array, int value)
     {
         int n = array.Length;
-        int last = array[n - 1];
-        array[n - 1] = valueToFind;
+        int[] extendedArray = new int[n + 1];
+        Array.Copy(array, extendedArray, n);
+        extendedArray[n] = value; // wartownik
+
         int i = 0;
-        while (array[i] != valueToFind)
+        while (extendedArray[i] != value)
         {
             i++;
         }
-        array[n - 1] = last;
-        if (i < n - 1 || array[n - 1] == valueToFind)
-        {
-            return i;
-        }
-        return -1;
+
+        return i;
     }
 }
